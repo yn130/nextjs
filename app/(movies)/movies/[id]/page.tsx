@@ -135,21 +135,6 @@ import MovieVideos from "../../../../components/movie-videos";
 
 
 // 가능한 버전 2
-
-// interface IParams {
-//   params: Promise<{ id: string }>;
-// }
-
-// export async function generateMetadata(props: { params: IParams }) {
-//   const params = await props.params;
-//   const id = params.id;
-//   const movie = await getMovie(id);
-
-//   return {
-//     title: movie.title,
-//   };
-// }
-
 interface IParams {
   params: Promise<{ id: string }>;
 }
@@ -162,8 +147,6 @@ export async function generateMetadata(props: IParams) {
     title: movie.title,
   };
 }
-
-
 
 
 export default async function MovieDetails({ params }
