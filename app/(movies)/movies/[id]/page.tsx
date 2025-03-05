@@ -98,3 +98,4 @@ export default async function MovieDetails({ params }: { params: { id: string } 
     </div>
   );
 }
+

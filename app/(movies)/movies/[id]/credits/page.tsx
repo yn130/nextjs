@@ -6,13 +6,11 @@ async function getMovie(id: string) {
     const response = await fetch(`${API_URL}/${id}`);
     return response.json();
   }
-interface CParams {
-    params:{id: string}
-}
 
 
 
-export default async function Credits({ params:{id} }: CParams) {
+
+export default async function Credits({ params: {id} }: { params: { id: string } }) {
     // const {id} = params; 
     const movie = await getMovie(id);
 
