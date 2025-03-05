@@ -1,4 +1,4 @@
-// import { API_URL } from "../app/(home)/page";
+
 
 
 // async function getMovies(id: string) {
@@ -13,8 +13,8 @@
 //     return <h6>{JSON.stringify(movie)}</h6>;
 // }
 
+import { API_URL } from "../app/constants";
 import potato from "../styles/movie-info.module.css";
-import { API_URL } from "../app/(home)/page";
 
 export async function getMovie(id: string) {
   const response = await fetch(`${API_URL}/${id}`);

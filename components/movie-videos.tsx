@@ -30,7 +30,8 @@
 //   return <h6>{JSON.stringify(videos)}</h6>;
 // }
 
-import { API_URL } from "../app/(home)/page";
+
+import { API_URL } from "../app/constants";
 import styles from "../styles/movie-videos.module.css";
 
 async function getVideos(id: string) {

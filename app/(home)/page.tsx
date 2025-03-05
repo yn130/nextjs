@@ -1,8 +1,8 @@
 // "use client"
 
-import Link from "next/link";
 import Movie from "../../components/movie";
 import styles from "../../styles/home.module.css"
+import { API_URL } from "../constants";
 
 // import { useState, useEffect } from "react";
 
@@ -36,8 +36,7 @@ export const metadata = {
 };
 
 
-
-export const API_URL = "https:///nomad-movies.nomadcoders.workers.dev/movies";
+ 
 
 async function getMovies(){
     // 아래 코드와 같은 기능을 함 

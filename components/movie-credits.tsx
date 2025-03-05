@@ -1,4 +1,5 @@
-import { API_URL } from "../app/(home)/page";
+import { API_URL } from "../app/constants";
+
 
 async function getMovieCredits(id:string) {
     return fetch(`${API_URL}/${id}/credits`).then(response => response.json());
