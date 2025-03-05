@@ -2,7 +2,9 @@ import { Suspense } from "react";
 import MovieInfo from "../../../../../components/movie-info";
 import MovieProviders from "../../../../../components/movie-providers";
 
-export default function provider({params}:{params:{id: string} }){
+export default function provider({params}
+    // :{params:{id: string} }
+){
     const {id} = params;
     return(
         <div>

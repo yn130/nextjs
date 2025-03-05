@@ -1,5 +1,4 @@
 import { Suspense } from "react";
-// import { API_URL } from "../../../(home)/page";
 import MovieInfo, { getMovie } from "../../../../components/movie-info";
 import MovieVideos from "../../../../components/movie-videos";
 
@@ -71,21 +70,104 @@ import MovieVideos from "../../../../components/movie-videos";
 //     return <h1> Movie {id} </h1>;
 //     }
 
+// interface IParams {
+//   params: {id: string}
+// }
+
+// export async function generateMetadata({params:{id}} 
+//   // 이 오류는 Next.js의 타입 정의와 실제 전달되는 값 사이의 불일치 때문에 발생함. Next.js 15 이후 일부 문서에서는 동적 라우트의 매개변수인 params와 searchParams가 Promise처럼 취급되어야 한다고 언급된 경우가 있지만, 실제로 Next.js는 plain object를 전달함. 
+//   // 즉, 타입 정의에서는 params가 Promise처럼 then, catch, finally 등의 메서드를 가진 객체여야 한다고 요구하지만, 실제 전달되는 값은 { id: string }와 같이 단순한 객체이기 때문에 타입 불일치 오류가 발생하는 것
+//   // 이 문제는 Next.js의 타입 정의 버그 혹은 문서상의 혼선으로 볼 수 있으며, 현재로서는 명시적 타입 제거로 해당 문제 우회 할 수 있음 
+//   // : IParams
+// ){
+
+//   const movie = await getMovie(id)
+
+//   return{
+//     title:movie.title,
+//   }
+// }
+
+
+// export default async function MovieDetails({ params }
+//   // : { params: { id: string } }
+// ) {
+//   const { id } = params;
+//   return (
+//     <div>
+//       <Suspense fallback={<h1>Loading movie info</h1>}>
+//         <MovieInfo id={id} />
+//       </Suspense>
+//       <Suspense fallback={<h1>Loading movie videos</h1>}>
+//         <MovieVideos id={id} />
+//       </Suspense>
+//     </div>
+//   );
+// }
+
+
+// 가능한 버전 1
+// export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
+//   // Promise로 전달된 params를 await로 해제합니다.
+//   const resolvedParams = await params;
+//   const { id } = resolvedParams;
+//   const movie = await getMovie(id);
+//   return {
+//     title: movie.title,
+//   };
+// }
+
+
+// // 타입 문제를 우회하기 위해 인자 타입을 any로 처리합니다.
+// export default async function MovieDetails(props: any) {
+//   const { id } = props.params;
+//   return (
+//     <div>
+//       <Suspense fallback={<h1>Loading movie info</h1>}>
+//         <MovieInfo id={id} />
+//       </Suspense>
+//       <Suspense fallback={<h1>Loading movie videos</h1>}>
+//         <MovieVideos id={id} />
+//       </Suspense>
+//     </div>
+//   );
+// }
+
+
+// 가능한 버전 2
+
+// interface IParams {
+//   params: Promise<{ id: string }>;
+// }
+
+// export async function generateMetadata(props: { params: IParams }) {
+//   const params = await props.params;
+//   const id = params.id;
+//   const movie = await getMovie(id);
+
+//   return {
+//     title: movie.title,
+//   };
+// }
+
 interface IParams {
-  params: {id: string}
+  params: Promise<{ id: string }>;
 }
 
-export async function generateMetadata({params:{id}} : IParams){
+export async function generateMetadata(props: IParams) {
+  const { id } = await props.params;
+  const movie = await getMovie(id);
 
-  const movie = await getMovie(id)
-
-  return{
-    title:movie.title,
-  }
+  return {
+    title: movie.title,
+  };
 }
 
 
-export default async function MovieDetails({ params }: { params: { id: string } }) {
+
+
+export default async function MovieDetails({ params }
+) {
   const { id } = params;
   return (
     <div>
@@ -98,4 +180,3 @@ export default async function MovieDetails({ params }: { params: { id: string } 
     </div>
   );
 }
-
