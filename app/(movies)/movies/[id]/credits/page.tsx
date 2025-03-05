@@ -1,18 +1,19 @@
 import { Suspense } from "react";
 import MovieCreditsInfo from "../../../../../components/movie-credits";
-import { API_URL } from "../../../../(home)/page";
-
+import { API_URL } from "../../../../constants";
 
 async function getMovie(id: string) {
     const response = await fetch(`${API_URL}/${id}`);
     return response.json();
   }
+interface CParams {
+    params:{id: string}
+}
 
 
 
-
-export default async function Credits({ params }: { params: { id: string } }) {
-    const {id} = params; 
+export default async function Credits({ params:{id} }: CParams) {
+    // const {id} = params; 
     const movie = await getMovie(id);
 
     return (
