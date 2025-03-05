@@ -37,7 +37,7 @@ export const metadata = {
 
 
 
-export const API_URL = "https:///nomad-movies.nomadcoders.workers.dev/movies"
+export const API_URL = "https:///nomad-movies.nomadcoders.workers.dev/movies";
 
 async function getMovies(){
     // 아래 코드와 같은 기능을 함 
